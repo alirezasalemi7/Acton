@@ -1,0 +1,43 @@
+actor A(4) {
+    knownactors {
+        B b1;
+        B b2;
+    }
+    actorvars {
+
+    }
+    msghandler initial() {
+
+    }
+
+    msghandler check(string temp) {
+        if(sender == self.b1){
+            print("b1");
+            print(temp);
+        }
+        else if(sender == self.b2){
+            print("b2");
+            print(temp);
+        }
+    }
+}
+
+actor B(4) {
+    knownactors {
+        A a;
+
+    }
+    actorvars {
+
+    }
+
+    msghandler initial(string temp) {
+         a.check(temp);
+    }
+}
+
+main {
+    A a(b1, b2):();
+    B b1(a):("flame");
+    B b2(a):("phonix");
+}
